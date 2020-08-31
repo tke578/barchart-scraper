@@ -19,11 +19,9 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 WORKDIR /app
 
-COPY ./requirements.txt /app
+COPY . /app
 
-COPY ./main_func.py /app
 
-COPY ./heroku.yml /app
 
 
 RUN pip install --upgrade pip

@@ -10,7 +10,7 @@ def run_uoa():
 			mongo_client.create_one(uoa_obj)
 
 	else:
-		print("No records")
+		print("No records found")
 
 
 run_uoa()

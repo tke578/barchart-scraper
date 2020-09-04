@@ -1,18 +1,17 @@
-from barchart import UOA
-from orm import UOAMongo
+from data import UOAScraper
 
 
 def run_uoa():
-	uoa = UOA()
-	if uoa.data:
-		mongo_client = UOAMongo()
-		for uoa_obj in uoa.data:
-			mongo_client.create_one(uoa_obj)
-
-	else:
-		print("No records found")
+	scraper = UOAScraper()
+	scraper.get_data()
 
 
-run_uoa()
+def main():
+	run_uoa()
+
+
+
+if __name__ == "__main__":
+    main()
 
 	

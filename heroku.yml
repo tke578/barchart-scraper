@@ -1,5 +1,5 @@
 build:
   docker:
     web: Dockerfile
-  run:
-    worker: python3 main_func.py
+run:
+  worker: python3 main_func.py

@@ -11,7 +11,6 @@ class UOAScraper:
 	def __init__(self):
 		self.mongo_client = UOAMongo()
 		self.slack_client = Slack()
-		print('Scraper done')
 
 	@retry(Exception)	
 	def get_data(self):

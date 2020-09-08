@@ -5,7 +5,7 @@ from datetime import datetime
 
 class UOAMongo:
 	def __init__(self):
-		host_string = "mongodb+srv://charmander:fsckj00!@barchart.ejira.mongodb.net/barchart?retryWrites=true&w=majority"
+		host_string = os.environ['MONGO_URI']
 		self.client = MongoClient(host_string)
 		db = self.client['barchart']
 		self.collection = db['uoa']

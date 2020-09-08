@@ -11,6 +11,7 @@ class UOAScraper:
 	def __init__(self):
 		self.mongo_client = UOAMongo()
 		self.slack_client = Slack()
+		print('Scraper done')
 
 	@retry(Exception)	
 	def get_data(self):
@@ -38,7 +39,6 @@ class UOAScraper:
 
 class MarketHours:
 	def is_market_open(date_time):
-		return True
 		holidays_2020 =  [date(2020,9,7), date(2020,11,26), date(2020,12,25)]
 		holidays_2021 = [date(2021,1,1), date(2021,1,18), date(2021,2,15), date(2021,4,2), date(2021,5,31), date(2021,7,5), date(2021,9,6), date(2021,11,25), date(2021,12,24)]
 		weekdays = [0,1,2,3,4]

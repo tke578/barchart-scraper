@@ -14,7 +14,7 @@ def is_datestring_today(date_string):
     if not date_string:
         return False
     try:
-        return parse(date_string).today() == date.today()
+        return parse(date_string).date() == date.today()
     except:
         return False
 

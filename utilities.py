@@ -1,12 +1,23 @@
 import os
 import requests
-from datetime import datetime
+from datetime import datetime, date
 from slackclient import SlackClient
 from functools import wraps
 import time
 import logging
+from dateutil.parser import parse
 
 logger = logging.getLogger(__name__)
+
+def is_datestring_today(date_string):
+    '''Last Trade column gets converted to date string from time string when markets closed ~= 1:30pm i.e. 06:30 ET => 09/15/2020'''
+    if not date_string:
+        return False
+    try:
+        return parse(date_string).today() == date.today()
+    except:
+        return False
+
 
 def retry(exceptions, tries=4, delay=10, backoff=2, logger=None):
     """

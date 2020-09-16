@@ -2,7 +2,7 @@ from datetime import datetime, time, date
 from barchart import UOA
 from orm import UOAMongo
 from normalize import normalize_uoa_response
-from utilities import Slack, retry
+from utilities import Slack, retry, is_datestring_today
 import logging
 
 logger = logging.getLogger(__name__)
@@ -20,7 +20,8 @@ class UOAScraper:
 				records_to_post = []
 				for uoa_obj in uoa.data:
 					normalized_response = normalize_uoa_response(uoa_obj)
-					records_to_post.append(normalized_response)
+					if is_datestring_today(normalized_response['Last Trade']):
+						records_to_post.append(normalized_response)
 				recent_records = self._latest_posted_records()
 				if len(records_to_post) > len(recent_records):
 					self.mongo_client.remove(filter={"_id": { "$in": recent_records }})

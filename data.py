@@ -15,7 +15,7 @@ class UOAScraper:
 	@retry(Exception)	
 	def get_data(self):
 		if MarketHours.is_market_open(datetime.now()):
-			logging.info('Scraper started ')
+			logging.info('Scraper started')
 			uoa = UOA()
 			if uoa.data:
 				logging.info('Scraper finished')

@@ -1,10 +1,14 @@
+import sys
 from data import UOAScraper
 
 
 def run_uoa():
-	scraper = UOAScraper()
-	scraper.get_data()
-	print('Scraper done')
+	try:
+		scraper = UOAScraper()
+		scraper.get_data()
+		print('Scraper done')
+	except:
+		sys.exit()
 
 
 def main():

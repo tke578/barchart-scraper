@@ -1,3 +1,4 @@
+import sys
 from data import UOAScraper
 import logging
 
@@ -5,8 +6,13 @@ logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s', level=loggin
 logger = logging.getLogger(__name__)
 
 def run_uoa():
-	scraper = UOAScraper()
-	scraper.get_data()
+
+	try:
+		scraper = UOAScraper()
+		scraper.get_data()
+		print('Scraper done')
+	except:
+		sys.exit()
 
 
 def main():

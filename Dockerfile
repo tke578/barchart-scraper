@@ -6,8 +6,6 @@ RUN echo "deb http://cdn-aws.deb.debian.org/debian  stable main\ndeb http://cdn-
 # install dependencies
 RUN apt-get update \
 && apt-get install -y wget gnupg apt-utils python3-pip git vim curl \
-&& apt-get install -y supervisor \
-&& apt-get install -y cron \
 && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
 && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
 && apt-get update \
@@ -24,11 +22,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 WORKDIR /app
 
 COPY . /app
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-COPY crontab.txt /var/crontab.txt
-RUN crontab /var/crontab.txt
-RUN chmod 600 /etc/crontab
+
 
 
 RUN pip install --upgrade pip
@@ -36,4 +31,4 @@ RUN pip3 install -r requirements.txt
 
 
 
-CMD ["/usr/bin/supervisord"]
+CMD [ "python3", "main_func.py"]

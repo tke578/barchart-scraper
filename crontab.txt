@@ -1,2 +1,0 @@
-*/15 6-14 * * 1-5 cd /app && /bin/bash run.sh >> /var/log/supervisord.log 2>&1
- 

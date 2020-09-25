@@ -5,7 +5,7 @@ from normalize import normalize_uoa_response
 from utilities import Slack, retry, is_datestring_today
 import logging
 
-logger = logging.getLogger(__name__)
+
 
 class UOAScraper:
 	def __init__(self):
@@ -15,8 +15,10 @@ class UOAScraper:
 	@retry(Exception, tries=2)	
 	def get_data(self):
 		if MarketHours.is_market_open(datetime.now()):
+			logging.info('Scraper started')
 			uoa = UOA()
 			if uoa.data:
+				logging.info('Scraper finished')
 				records_to_post = []
 				for uoa_obj in uoa.data:
 					normalized_response = normalize_uoa_response(uoa_obj)
@@ -26,6 +28,8 @@ class UOAScraper:
 				if len(records_to_post) > len(recent_records):
 					self.mongo_client.remove(filter={"_id": { "$in": recent_records }})
 					self.mongo_client.create_many(records_to_post)
+			else:
+				logging.warning('No results from scraper')
 
 
 	def _latest_posted_records(self):

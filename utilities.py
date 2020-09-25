@@ -190,6 +190,16 @@ class Slack(object):
             if result['ok']: self._ims = result['ims']
             return self._ims
 
+    def get_message_link(self, channel='', thread_id='', thread_item_id=''):
+        ''' Get the link for the given message.
+            Parameters:
+            - str(channel), str(thread_id)
+            - Optional: str(thread_item_id)
+            Notes: Parameters are kwargs to enable lazy rendering using "send_message" outputs.
+            Returns: str(link)
+        '''
+        if not thread_item_id: return 'https://synapsepay.slack.com/archives/{channel_id}/p{thread_id}'.format(channel_id=channel, thread_id=thread_id.replace('.', ''))
+        else: return 'https://synapsepay.slack.com/archives/{channel_id}/p{thread_id}?thread_ts={thread_ts}&cid={channel_id}'.format(channel_id=channel, thread_id=thread_item_id.replace('.', ''), thread_ts=thread_id)
 
     def get_user(self, query):
         ''' Get the user matching the given filter.

@@ -15,8 +15,13 @@ class UOAScraper:
 	@retry(Exception, tries=2)	
 	def get_data(self):
 		if MarketHours.is_market_open(datetime.now()):
-			logging.info('Scraper started')
-			uoa = UOA()
+			print('Scraper started')
+			print(datetime.now())
+			uoa = UOA(webdriver_path='/usr/local/bin/geckodriver')
+			print('Scraper finished')
+			print(datetime.now())
+			print('Size of records')
+			print(len(uoa.data))
 			if uoa.data:
 				logging.info('Scraper finished')
 				records_to_post = []
@@ -54,4 +59,5 @@ class MarketHours:
 			holidays = holidays_2021
 		if date_time.date() not in holidays and date_time.date().weekday() in weekdays:
 			return start <= date_time.now().time() <= end
+		print("Market is Closed")
 		return False

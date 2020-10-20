@@ -46,6 +46,7 @@ RUN pip3 install -r /config/requirements.txt
 # setup config
 COPY config/nginx.conf /etc/nginx/sites-enabled/
 COPY /config/app.ini /config/
+RUN true
 COPY /config/supervisor.conf /etc/supervisor/conf.d/
 
 RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf

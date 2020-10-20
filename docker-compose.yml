@@ -9,5 +9,5 @@ services:
     command: bash -c "supervisord -n"
     environment:
       SLACK_TOKEN: ${SLACK_TOKEN}
-      MONG_URI: ${MONG_URI}
+      MONGO_URI: ${MONGO_URI}
       FLASK_ENV: production

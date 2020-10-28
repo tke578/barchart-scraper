@@ -12,7 +12,7 @@ class UOAScraper:
 		self.mongo_client = UOAMongo()
 		self.slack_client = Slack()
 
-	#@retry(Exception, tries=1)	
+	@retry(Exception, tries=1)	
 	def get_data(self):
 		if MarketHours.is_market_open(datetime.now()):
 			print('Scraper started')

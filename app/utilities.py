@@ -18,6 +18,14 @@ def is_datestring_today(date_string):
     except:
         return False
 
+def is_a_datestring(date_string):
+    if not date_string:
+        return False
+    try:
+        parse(date_string)
+    except:
+        return False
+
 
 def retry(exceptions, tries=4, delay=10, backoff=2, logger=None):
     """

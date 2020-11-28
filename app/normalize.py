@@ -17,7 +17,7 @@ def normalize_uoa_response(obj):
 		"Open Int": int(obj.get('Open Int',0).replace(',','')),
 		"Vol/OI": 	float(obj.get('Vol/OI', 0).replace(',','')),
 		"IV": 		float(obj.get('IV',0).replace('%','')),
-		"Last Trade": get_date(obj.get('Last Trade', None)),
+		"Last Trade": obj.get('Last Trade', None), #sometimes appends timezone attriute i.e. ET
 		"created_at": datetime.now(),
 		"updated_at": datetime.now()
 	}

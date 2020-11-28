@@ -2,7 +2,7 @@ from datetime import datetime, time, date
 from barchart import UOA
 from orm import UOAMongo
 from normalize import normalize_uoa_response
-from utilities import Slack, retry, is_datestring_today
+from utilities import Slack, retry, is_datestring_today, is_a_datestring
 import logging
 
 

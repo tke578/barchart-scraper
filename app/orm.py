@@ -21,3 +21,9 @@ class UOAMongo:
 
 	def remove(self, filter={}):
 		self.collection.remove(filter)
+
+	def update_one(self, filter={}, obj={}):
+		self.collection.update_one(filter, obj)
+
+	def update_many(self, filter={}, obj={}):
+		self.collection.update_many(filter, obj)

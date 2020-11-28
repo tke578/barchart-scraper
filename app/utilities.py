@@ -23,6 +23,7 @@ def is_a_datestring(date_string):
         return False
     try:
         parse(date_string)
+        return True
     except:
         return False
 

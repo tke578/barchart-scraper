@@ -11,7 +11,6 @@ def hello():
 	return "Time is running out!"
 
 
-#@app.route('/run_uoa', methods=['GET'])
 def run_uoa():
 	scraper = UOAScraper()
 	scraper.get_data()

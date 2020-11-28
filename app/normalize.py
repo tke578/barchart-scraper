@@ -28,7 +28,7 @@ def get_date(date_string, date_format='%m/%d/%y %H:%M:%S'):
 	if not is_a_valid_date_str:
 		return None
 	time_string = f'{datetime.now().time().hour}:{datetime.now().time().minute}:{datetime.now().time().second}'
-	return datetime.strptime(date_string + time_string, date_format)
+	return datetime.strptime(date_string + ' ' + time_string, date_format)
 
 
 

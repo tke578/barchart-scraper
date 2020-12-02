@@ -26,14 +26,9 @@ class UOAScraper:
 				logging.info('Scraper finished')
 				records_to_post = []
 				for uoa_obj in uoa.data:
-					try:
-						normalized_response = normalize_uoa_response(uoa_obj)
-						if is_datestring_today(normalized_response['Last Trade']):
-							records_to_post.append(normalized_response)
-					except Exception as e:
-						#TO DO: SEND SLACK MSG
-						print(str(e))
-						continue
+					normalized_response = normalize_uoa_response(uoa_obj)
+					if is_datestring_today(normalized_response['Last Trade']):
+						records_to_post.append(normalized_response)
 				recent_records = self._latest_posted_records()
 				if len(records_to_post) > len(recent_records):
 					self.mongo_client.remove(filter={"_id": { "$in": recent_records }})

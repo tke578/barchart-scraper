@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 from utilities import is_a_datestring
 
@@ -6,7 +7,7 @@ def normalize_uoa_response(obj):
 		"Symbol": 	obj.get('Symbol', None),
 		"Price": 	float(obj.get('Price', 0).replace(',','')),
 		"Type": 	obj.get('Type', None),
-		"Strike": 	float(obj.get('Strike', 0).replace(',','')),
+		"Strike": 	sanitize_float(obj.get('Strike', '0').replace(',','')),
 		"Exp Date": get_date(obj.get('Exp Date', None)),
 		"DTE": 		float(obj.get('DTE', 0).replace(',','')),
 		"Bid": 		float(obj.get('Bid', 0).replace(',','')),
@@ -29,6 +30,11 @@ def get_date(date_string, date_format='%m/%d/%y %H:%M:%S'):
 		return None
 	time_string = f'{datetime.now().time().hour}:{datetime.now().time().minute}:{datetime.now().time().second}'
 	return datetime.strptime(date_string + ' ' + time_string, date_format)
+
+def sanitize_float(data):
+	non_decimal = re.compile(r'[^\d.]+')
+	return float(non_decimal.sub('', data))
+	
 
 
 
